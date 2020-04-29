@@ -1,6 +1,7 @@
 package ua.lviv.lgs.pv.repository.impl;
 
 import org.apache.log4j.Logger;
+import ua.lviv.lgs.pv.config.ConnectionManager;
 import ua.lviv.lgs.pv.entity.User;
 import ua.lviv.lgs.pv.repository.UserRepository;
 
@@ -24,9 +25,10 @@ public class UserRepositoryImpl implements UserRepository {
         this.connection = connection;
     }
 
-    public static UserRepositoryImpl getInstance(Connection connection) {
+    public static UserRepositoryImpl getInstance() {
+
         if (instance == null) {
-            instance = new UserRepositoryImpl(connection);
+            instance = new UserRepositoryImpl(ConnectionManager.createConnection());
         }
         return instance;
     }

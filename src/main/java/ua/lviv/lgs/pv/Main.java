@@ -12,7 +12,7 @@ public class Main {
         System.out.println("Start project");
 
         Connection connection = ConnectionManager.createConnection();
-        UserRepository userRepository = UserRepositoryImpl.getInstance(connection);
+        UserRepository userRepository = UserRepositoryImpl.getInstance();
 
         //        User user = new User();
         //        user.setFirstName("Ivan");

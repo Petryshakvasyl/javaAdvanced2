@@ -3,6 +3,7 @@ package ua.lviv.lgs.pv.service.imp;
 import org.apache.log4j.Logger;
 import ua.lviv.lgs.pv.entity.User;
 import ua.lviv.lgs.pv.repository.UserRepository;
+import ua.lviv.lgs.pv.repository.impl.UserRepositoryImpl;
 import ua.lviv.lgs.pv.service.UserService;
 
 import java.util.List;
@@ -20,9 +21,9 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    public static UserServiceImpl getInstance(UserRepository userRepository) {
+    public static UserServiceImpl getInstance() {
         if (instance == null) {
-            instance = new UserServiceImpl(userRepository);
+            instance = new UserServiceImpl(UserRepositoryImpl.getInstance());
         }
         return instance;
     }
