@@ -1,0 +1,1 @@
+<h2>Sorry you do not have a permission to visit the page</h2>
