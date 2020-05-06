@@ -3,7 +3,7 @@ package ua.lviv.lgs.pv.controller;
 import org.apache.log4j.Logger;
 import ua.lviv.lgs.pv.entity.User;
 import ua.lviv.lgs.pv.service.UserService;
-import ua.lviv.lgs.pv.service.imp.UserServiceImpl;
+import ua.lviv.lgs.pv.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

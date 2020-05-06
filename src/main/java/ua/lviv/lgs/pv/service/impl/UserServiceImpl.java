@@ -1,4 +1,4 @@
-package ua.lviv.lgs.pv.service.imp;
+package ua.lviv.lgs.pv.service.impl;
 
 import org.apache.log4j.Logger;
 import ua.lviv.lgs.pv.entity.User;

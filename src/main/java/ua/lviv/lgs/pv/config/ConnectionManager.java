@@ -12,9 +12,9 @@ public final class ConnectionManager {
 
     private static final String URL = "jdbc:mysql://localhost:3306/i_shop";
 
-    private static String USER_NAME = "user";
+    private static String USER_NAME = "db_user";
 
-    private static String PASSWORD = "1111";
+    private static String PASSWORD = "db_pass";
 
     private static Connection connection;
 

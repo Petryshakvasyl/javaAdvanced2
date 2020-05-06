@@ -24,8 +24,8 @@ public class LoginFilter implements Filter {
         log.info("filtering request");
         final HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         final HttpSession session = httpRequest.getSession();
-        boolean isLoginPage = httpRequest.getRequestURI().equals("/advanced/login");
-        boolean isRegistrationPage = httpRequest.getRequestURI().equals("/advanced/registration");
+        boolean isLoginPage = httpRequest.getRequestURI().equals("/login");
+        boolean isRegistrationPage = httpRequest.getRequestURI().equals("/registration");
         boolean isUserLoggedIn = session != null && session.getAttribute("email") != null;
         if (isUserLoggedIn || isLoginPage || isRegistrationPage) {
             log.info("user is logged in");

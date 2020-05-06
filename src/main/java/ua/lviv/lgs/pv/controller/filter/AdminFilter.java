@@ -27,7 +27,7 @@ public class AdminFilter implements Filter {
                 httpRequest.getRequestDispatcher("/access-deny.jsp").forward(request, response);
             }
         } else {
-            ((HttpServletResponse) response).sendRedirect("/advanced/login");
+            ((HttpServletResponse) response).sendRedirect("/login");
         }
     }
 
