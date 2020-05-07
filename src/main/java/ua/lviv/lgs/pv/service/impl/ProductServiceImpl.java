@@ -19,6 +19,12 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = ProductRepositoryImpl.getInstance();
     }
 
+    private static ProductService instance = new ProductServiceImpl();
+
+    public static ProductService getInstance() {
+        return instance;
+    }
+
     @Override
     public void save(Product product) {
         log.debug("save product: " + product);
