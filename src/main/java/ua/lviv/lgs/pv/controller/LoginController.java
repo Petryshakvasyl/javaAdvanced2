@@ -43,8 +43,9 @@ public class LoginController extends HttpServlet {
             log.debug("user is present");
             if (user.getPassword().equals(password)) {
                 req.getSession().setAttribute("email", email);
+                req.getSession().setAttribute("bucketId", user.getBucketId());
                 req.getSession().setAttribute("role", user.getRole());
-                resp.sendRedirect("home");
+                resp.sendRedirect("product-list");
             } else {
                 log.debug("invalid password");
                 req.getRequestDispatcher("login.jsp").forward(req, resp);

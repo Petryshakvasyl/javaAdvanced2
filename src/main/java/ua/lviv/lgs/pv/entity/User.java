@@ -14,6 +14,8 @@ public class User {
 
     private String password;
 
+    private Integer bucketId;
+
     public User() {
     }
 
@@ -71,6 +73,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getBucketId() {
+        return bucketId;
+    }
+
+    public void setBucketId(Integer bucketId) {
+        this.bucketId = bucketId;
     }
 
     @Override

@@ -2,13 +2,16 @@ package ua.lviv.lgs.pv.repository.impl;
 
 import org.apache.log4j.Logger;
 import ua.lviv.lgs.pv.config.ConnectionManager;
+import ua.lviv.lgs.pv.entity.Bucket;
 import ua.lviv.lgs.pv.entity.User;
+import ua.lviv.lgs.pv.repository.BucketRepository;
 import ua.lviv.lgs.pv.repository.UserRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,13 +19,18 @@ import java.util.Optional;
 public class UserRepositoryImpl implements UserRepository {
 
     private static final Logger log = Logger.getLogger(UserRepositoryImpl.class);
+    public static final String CREATE_USER = "insert into users " +
+            "(first_name, last_name, email, password, role, bucket_id) value (?, ?, ?, ?, ?, ?)";
 
     private static UserRepositoryImpl instance;
+
+    private BucketRepository bucketRepository;
 
     private Connection connection;
 
     private UserRepositoryImpl(Connection connection) {
         this.connection = connection;
+        this.bucketRepository = BucketRepositoryImpl.getInstance();
     }
 
     public static UserRepositoryImpl getInstance() {
@@ -34,24 +42,27 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void save(User user) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "insert into users (first_name, last_name, email, password, role) value (?, ?, ?, ?, ?)")) {
-            ;
+    public User save(User user) {
+        Bucket bucket = new Bucket();
+        bucket.setPurchaseDate(LocalDateTime.now());
+
+        bucket = bucketRepository.save(bucket);
+        try (PreparedStatement statement = connection.prepareStatement(CREATE_USER)) {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getRole());
+            statement.setInt(6, bucket.getId());
             statement.execute();
         } catch (SQLException e) {
             log.error("error while saving user" + user, e);
         }
+        return user;
     }
 
     @Override
     public void update(User user) {
-
         try (PreparedStatement statement = connection.prepareStatement(
                 "update users set first_name =?, last_name=?, email=?, password=?, role=? where id =?")) {
             statement.setString(1, user.getFirstName());
@@ -118,12 +129,14 @@ public class UserRepositoryImpl implements UserRepository {
         String lastName = resultSet.getString("last_name");
         String role = resultSet.getString("role");
         String password = resultSet.getString("password");
+        Integer bucketId = resultSet.getInt("bucket_id");
         user.setId(id);
         user.setEmail(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPassword(password);
         user.setRole(role);
+        user.setBucketId(bucketId);
         return user;
     }
 

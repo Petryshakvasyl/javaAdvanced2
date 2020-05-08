@@ -1,6 +1,5 @@
 package ua.lviv.lgs.pv.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Bucket {
@@ -9,15 +8,12 @@ public class Bucket {
 
     private LocalDateTime purchaseDate;
 
-    private Integer userId;
+    public Bucket() {
+    }
 
-    private Integer productId;
-
-    public Bucket(Integer id, LocalDateTime purchaseDate, Integer userId, Integer productId) {
+    public Bucket(Integer id, LocalDateTime purchaseDate) {
         this.id = id;
         this.purchaseDate = purchaseDate;
-        this.userId = userId;
-        this.productId = productId;
     }
 
     public Integer getId() {
@@ -34,21 +30,5 @@ public class Bucket {
 
     public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 }

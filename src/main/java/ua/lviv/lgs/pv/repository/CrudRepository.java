@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface CrudRepository<T, E> {
 
-    void save(T t);
+    T save(T t);
 
     void update(T t);
 

@@ -37,7 +37,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 	}
 
 	@Override
-	public void save(Product product) {
+	public Product save(Product product) {
 		try {
 			preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, product.getName());
@@ -51,6 +51,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 		} catch (SQLException e) {
 			log.error("error while saving product ", e);
 		}
+		return product;
 	}
 
 	@Override
