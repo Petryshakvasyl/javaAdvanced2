@@ -1,0 +1,19 @@
+2020-05-08 20:23:30 [DEBUG] ProductRepositoryImpl:43 - find all products
+2020-05-08 20:23:35 [INFO ] LoginFilter:24 - filtering request
+2020-05-08 20:23:35 [INFO ] LoginFilter:31 - user is logged in
+2020-05-08 20:23:35 [INFO ] AddToBucketController:28 - add product to bucket
+2020-05-08 20:23:37 [INFO ] LoginFilter:24 - filtering request
+2020-05-08 20:23:37 [INFO ] LoginFilter:31 - user is logged in
+2020-05-08 20:23:37 [DEBUG] ProductRepositoryImpl:43 - find all products
+2020-05-08 20:24:09 [INFO ] LoginFilter:24 - filtering request
+2020-05-08 20:24:09 [INFO ] LoginFilter:31 - user is logged in
+2020-05-08 20:24:09 [DEBUG] ProductRepositoryImpl:43 - find all products
+2020-05-08 20:24:14 [INFO ] LoginFilter:24 - filtering request
+2020-05-08 20:24:14 [INFO ] LoginFilter:31 - user is logged in
+2020-05-08 20:24:14 [INFO ] AddToBucketController:28 - add product to bucket
+2020-05-08 20:24:17 [INFO ] LoginFilter:24 - filtering request
+2020-05-08 20:24:17 [INFO ] LoginFilter:31 - user is logged in
+2020-05-08 20:24:17 [DEBUG] ProductRepositoryImpl:43 - find all products
+2020-05-08 20:24:27 [INFO ] LoginFilter:24 - filtering request
+2020-05-08 20:24:27 [INFO ] LoginFilter:31 - user is logged in
+2020-05-08 20:24:27 [INFO ] AddToBucketController:28 - add product to bucket

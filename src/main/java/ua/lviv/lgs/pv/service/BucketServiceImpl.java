@@ -51,4 +51,8 @@ public class BucketServiceImpl implements BucketService {
         bucketRepository.deleteById(id);
     }
 
+    @Override
+    public int getCountProductsInBucket(Integer bucketId) {
+        return  bucketRepository.getCountProductsInBucket(bucketId);
+    }
 }

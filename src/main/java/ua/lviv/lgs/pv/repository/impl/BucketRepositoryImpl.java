@@ -125,6 +125,19 @@ public class BucketRepositoryImpl implements BucketRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    @Override
+    public int getCountProductsInBucket(Integer bucketId) {
+        try {
+            preparedStatement = connection.prepareStatement("SELECT count(*) FROM bucket_product where bucket_id = ?");
+            preparedStatement.setInt(1, bucketId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return  resultSet.getInt(1);
+        } catch (SQLException e) {
+            log.error("error while get count of products in bucket id: " + bucketId, e);
+        }
+        return 0;
     }
 }

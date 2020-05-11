@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div class="container">
-    bucket: 1
+    bucket: ${productsCountInBucket}
 </div>
 <div class="row">
     <c:forEach items="${products}" var="product">
