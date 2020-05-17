@@ -1,34 +1,36 @@
 package ua.lviv.lgs.pv.repository.impl;
 
+import lombok.RequiredArgsConstructor;
 import ua.lviv.lgs.pv.entity.User;
 import ua.lviv.lgs.pv.repository.UserRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
+@NamedQueries(
+        @NamedQuery(name = "findByEmail", query = "select u from User u where u.email = ?1")
+)
+@RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
-    private final Connection connection;
-
-    public UserRepositoryImpl(Connection connection) {
-        this.connection = connection;
-    }
+    private final EntityManager entityManager;
 
     @Override
     public void save(User user) {
-        try (PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO user (first_name, last_name) values(?, ?)")) {
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
+    }
+
+    public Optional<User> findByEmail(String email) {
+        TypedQuery<User> query = entityManager.createNamedQuery("findByEmail", User.class);
+        query.setParameter(1, email);
+        User user = query.getSingleResult();
+        return Optional.ofNullable(user);
     }
 
     @Override
@@ -38,26 +40,19 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findById(Integer id) {
-        return Optional.empty();
+        User user = entityManager.find(User.class, id);
+        return Optional.ofNullable(user);
     }
 
     @Override
     public List<User> findAll() {
-        List<User> result = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM user");
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                result.add(user);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        //JPQL
+        // select * from user
+//        Query query = entityManager.createQuery("select u from User u");
+//        List<User> users = query.getResultList();
 
-        return result;
+        TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
+        return query.getResultList();
     }
 
     @Override

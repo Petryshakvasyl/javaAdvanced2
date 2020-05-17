@@ -4,27 +4,39 @@ import ua.lviv.lgs.pv.entity.User;
 import ua.lviv.lgs.pv.repository.UserRepository;
 import ua.lviv.lgs.pv.repository.impl.UserRepositoryImpl;
 
-import java.sql.Connection;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.List;
-
-import static ua.lviv.lgs.pv.ConnectionManager.createConnection;
+import java.util.Optional;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Connection connection = createConnection();
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hibernateUnit");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        UserRepository userRepository = new UserRepositoryImpl(entityManager);
 
-        UserRepository userRepository = new UserRepositoryImpl(connection);
-        // create new user
-        //        User user = new User("Ivan", "Dovrzenko");
-        //        userRepository.save(user);
-        //        System.out.println(user);
+//        User user = new User();
+//        user.setEmail("testuser4@mail.com");
+//        user.setFirstName("Test4 FirstName");
+//        user.setLastName("Test4 last name");
+//        userRepository.save(user);
 
-        List<User> allUsers = userRepository.findAll();
+//        System.out.println(user);
 
-        System.out.println(allUsers);
+        // find user by id
+        Optional<User> optionalUser = userRepository.findById(1);
+        optionalUser.ifPresent(System.out::println);
 
+        //find all users
+        System.out.println("DEBUG SELECT ALL");
+        List<User> users = userRepository.findAll();
+        users.forEach(System.out::println);
+
+        Optional<User> eserByEmail = userRepository.findByEmail("testuser3@mail.com");
+        eserByEmail.ifPresent(System.out::println);
 
     }
 }

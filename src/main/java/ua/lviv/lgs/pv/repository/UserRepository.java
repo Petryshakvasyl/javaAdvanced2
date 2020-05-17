@@ -15,6 +15,8 @@ public interface UserRepository {
 
     List<User> findAll();
 
+    Optional<User> findByEmail(String email);
+
     void deleteById(Integer id);
 
     //crud create read update delete
