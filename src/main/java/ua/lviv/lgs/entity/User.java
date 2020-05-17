@@ -1,11 +1,12 @@
-package ua.lviv.lgs.pv.entity;
-
+package ua.lviv.lgs.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
 
 @Entity
 @Table(name = "user")
@@ -13,14 +14,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(nullable = false)
+    private Long id;
+    @Column(name = "first_name")
     private String firstName;
-
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
-
-    @Column(unique = true, nullable = false, name = "user_email")
+    @Column(name = "email")
     private String email;
 }
