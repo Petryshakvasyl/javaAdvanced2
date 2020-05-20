@@ -15,7 +15,7 @@
             <property name="javax.persistence.jdbc.password" value="db_pass"/>
 
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>
