@@ -1,11 +1,13 @@
-package ua.lviv.lgs.spring.service;
+package ua.lviv.lgs.spring.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ua.lviv.lgs.spring.domain.MoneyAccount;
 import ua.lviv.lgs.spring.domain.User;
+import ua.lviv.lgs.spring.error.ResourceNotFoundException;
 import ua.lviv.lgs.spring.repository.UserRepository;
-import ua.lviv.lgs.spring.service.error.ResourceNotFoundException;
+import ua.lviv.lgs.spring.service.MoneyAccountService;
+import ua.lviv.lgs.spring.service.UserService;
 
 import javax.transaction.Transactional;
 import java.util.Collections;

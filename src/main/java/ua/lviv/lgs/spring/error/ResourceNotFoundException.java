@@ -1,7 +1,7 @@
-package ua.lviv.lgs.spring.service.error;
+package ua.lviv.lgs.spring.error;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(Long id) {
-        super("resource with id " + id + " was not found");
+        super("Resource with id " + id + " was not found");
     }
 }

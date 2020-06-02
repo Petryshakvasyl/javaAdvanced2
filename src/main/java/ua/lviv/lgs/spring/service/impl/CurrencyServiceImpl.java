@@ -1,9 +1,10 @@
-package ua.lviv.lgs.spring.service;
+package ua.lviv.lgs.spring.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ua.lviv.lgs.spring.domain.Currency;
 import ua.lviv.lgs.spring.repository.CurrencyRepository;
+import ua.lviv.lgs.spring.service.CurrencyService;
 
 @Slf4j
 @Service

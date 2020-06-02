@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -29,5 +31,9 @@ public class MoneyAccount {
 
     @OneToOne
     private Currency currency;
+
+    @OneToMany
+    @JoinColumn(name = "money_account_id")
+    private Set<Transaction> transactions = new HashSet<>();
 
 }

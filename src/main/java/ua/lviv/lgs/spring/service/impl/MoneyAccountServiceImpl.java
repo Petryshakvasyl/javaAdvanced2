@@ -1,10 +1,12 @@
-package ua.lviv.lgs.spring.service;
+package ua.lviv.lgs.spring.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ua.lviv.lgs.spring.domain.Currency;
 import ua.lviv.lgs.spring.domain.MoneyAccount;
 import ua.lviv.lgs.spring.repository.MoneyAccountRepository;
+import ua.lviv.lgs.spring.service.CurrencyService;
+import ua.lviv.lgs.spring.service.MoneyAccountService;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
