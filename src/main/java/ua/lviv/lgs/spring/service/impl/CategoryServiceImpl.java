@@ -3,6 +3,7 @@ package ua.lviv.lgs.spring.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ua.lviv.lgs.spring.domain.Category;
+import ua.lviv.lgs.spring.domain.Type;
 import ua.lviv.lgs.spring.error.ResourceNotFoundException;
 import ua.lviv.lgs.spring.repository.CategoryRepository;
 import ua.lviv.lgs.spring.service.CategoryService;
@@ -57,5 +58,10 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteById(Long id) {
         log.debug("delete category by id {}", id);
         categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Category> findByType(Type type) {
+        return categoryRepository.findByType(type);
     }
 }

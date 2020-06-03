@@ -43,7 +43,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public TransactionDTO findById(Long id) {
-        return null;
+        return transactionRepository.findById(id).map(transactionMapper::toDTO)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     @Override

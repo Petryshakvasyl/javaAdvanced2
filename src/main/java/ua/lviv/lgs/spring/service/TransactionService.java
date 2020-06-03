@@ -5,7 +5,7 @@ import ua.lviv.lgs.spring.dto.TransactionDTO;
 
 public interface TransactionService {
 
-    TransactionDTO createInCurrentUserAccount(TransactionDTO transaction, Long id);
+    TransactionDTO createInCurrentUserAccount(TransactionDTO transaction, Long userId);
 
     TransactionDTO findById(Long id);
 

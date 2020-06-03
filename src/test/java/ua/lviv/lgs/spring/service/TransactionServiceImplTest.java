@@ -11,8 +11,13 @@ import ua.lviv.lgs.spring.service.mapper.TransactionMapper;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static ua.lviv.lgs.spring.Constants.DATE_FORMAT;
 
 @SpringBootTest
 class TransactionServiceImplTest {
@@ -76,11 +81,15 @@ class TransactionServiceImplTest {
         TransactionDTO transactionDTO = new TransactionDTO();
         transactionDTO.setType(Type.EXPENSE);
         transactionDTO.setAmount(new BigDecimal(100));
-        transactionDTO.setDate(new Date());
+        transactionDTO.setDate(new SimpleDateFormat(DATE_FORMAT).format(new Date()));
         transactionDTO.setCategoryId(category.getId());
 
-        TransactionDTO savedTransaction = transactionService.createInCurrentUserAccount(transactionDTO, user.getId());
+        TransactionDTO returnedTransaction = transactionService.createInCurrentUserAccount(transactionDTO, user.getId());
+        assertNotNull(returnedTransaction.getId());
 
+        Optional<Transaction> savedTransaction = transactionRepository.findById(returnedTransaction.getId());
+        assertTrue(savedTransaction.isPresent());
+        assertEquals(savedTransaction.get().getId(), returnedTransaction.getId());
 
     }
 }

@@ -1,6 +1,7 @@
 package ua.lviv.lgs.spring.service;
 
 import ua.lviv.lgs.spring.domain.Category;
+import ua.lviv.lgs.spring.domain.Type;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +18,5 @@ public interface CategoryService {
 
     void deleteById(Long id);
 
+    List<Category> findByType(Type type);
 }
