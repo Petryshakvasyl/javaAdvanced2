@@ -13,3 +13,5 @@ INSERT INTO category value (7, 'Other', 'EXPENSE');
 
 INSERT INTO category value (8, 'Salary', 'INCOME');
 INSERT INTO category value (9, 'Deposits', 'INCOME');
+
+insert into role value("ROLE_USER")

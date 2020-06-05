@@ -32,6 +32,10 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "money_account_id")
+    private MoneyAccount moneyAccount;
 }
 
 

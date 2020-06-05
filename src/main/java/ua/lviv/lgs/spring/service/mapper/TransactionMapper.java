@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import ua.lviv.lgs.spring.domain.Transaction;
 import ua.lviv.lgs.spring.dto.TransactionDTO;
+import ua.lviv.lgs.spring.dto.TransactionWithCategoryDTO;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -19,6 +20,8 @@ public interface TransactionMapper {
     @Mapping(source = "categoryId", target = "category.id")
     @Mapping(source = "date", target = "date", qualifiedByName = "convertToInstant")
     Transaction toEntity(TransactionDTO transactionDTO);
+
+    TransactionWithCategoryDTO toDTOWithCategory(Transaction transaction);
 
     @Named("convertToInstant")
     default Instant convertToInstant(String date) {

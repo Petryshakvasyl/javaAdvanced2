@@ -28,11 +28,17 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = false)
+    private String password;
+
     @Column(nullable = false, unique = true)
     private String email;
 
     @OneToOne
     private MoneyAccount currentAccount;
+
+    @OneToMany
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany
     @JoinColumn(name = "user_id")

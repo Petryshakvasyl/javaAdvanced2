@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ua.lviv.lgs.spring.domain.*;
 import ua.lviv.lgs.spring.dto.TransactionDTO;
 import ua.lviv.lgs.spring.repository.*;
+import ua.lviv.lgs.spring.service.impl.TransactionServiceImpl;
 import ua.lviv.lgs.spring.service.mapper.TransactionMapper;
 
 import javax.transaction.Transactional;

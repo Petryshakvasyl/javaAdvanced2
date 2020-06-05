@@ -1,16 +1,23 @@
 package ua.lviv.lgs.spring.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.lviv.lgs.spring.domain.Type;
 import ua.lviv.lgs.spring.dto.TransactionDTO;
+import ua.lviv.lgs.spring.dto.TransactionWithCategoryDTO;
+import ua.lviv.lgs.spring.dto.UserDTO;
 import ua.lviv.lgs.spring.service.CategoryService;
 import ua.lviv.lgs.spring.service.TransactionService;
+import ua.lviv.lgs.spring.service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,20 +29,23 @@ public class TransactionController {
 
     private final TransactionService transactionService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
-    public TransactionController(TransactionService transactionService, CategoryService categoryService) {
+    public TransactionController(TransactionService transactionService, CategoryService categoryService, UserService userService) {
         this.transactionService = transactionService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @PostMapping("/transactions")
-    public String createOrUpdateTransaction(@Valid @ModelAttribute("transaction") TransactionDTO transaction, BindingResult bindingResult) {
+    public String createOrUpdateTransaction(@Valid @ModelAttribute("transaction") TransactionDTO transaction, BindingResult bindingResult,
+                                            Principal principal) {
         log.debug("Rest request to create transaction");
         if (bindingResult.hasErrors()) {
             return "createTransaction";
         }
-        long userId = 3L; // TODO: 02.06.2020 change to real userId
-        TransactionDTO created = transactionService.createInCurrentUserAccount(transaction, userId);
+        UserDTO user = userService.findByUsername(principal.getName()).orElseThrow(() -> new UsernameNotFoundException(principal.getName()));
+        TransactionDTO created = transactionService.createInCurrentUserAccount(transaction, user.getId());
         log.debug("success created transaction {}", created);
         return "createTransactionSuccess";
     }
@@ -57,5 +67,14 @@ public class TransactionController {
         model.addAttribute("transaction", transactionDTO);
         model.addAttribute("categories", categoryService.findByType(type));
         return "createTransaction";
+    }
+
+    @GetMapping("/transactions/list")
+    public String getIncomePage(Model model, @RequestParam Type type, Pageable pageable) {
+        log.info("in comtroller");
+        Page<TransactionWithCategoryDTO> transactionPage = transactionService.findTypeForCurrentUser(type, pageable);
+        model.addAttribute("transactions", transactionPage);
+        model.addAttribute("type", type);
+        return "transactions";
     }
 }

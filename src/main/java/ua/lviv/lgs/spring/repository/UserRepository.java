@@ -25,5 +25,5 @@ public interface UserRepository extends JpaRepository<User, Long>, UserRepositor
     @Query("select u.currentAccount from User u where u.id = ?1")
     Optional<MoneyAccount> findUsersCurrentAccount(Long id);
 
-
+    Optional<User> findByUsername(String name);
 }

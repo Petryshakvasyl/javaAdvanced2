@@ -1,7 +1,10 @@
 package ua.lviv.lgs.spring.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import ua.lviv.lgs.spring.domain.Type;
 import ua.lviv.lgs.spring.dto.TransactionDTO;
+import ua.lviv.lgs.spring.dto.TransactionWithCategoryDTO;
 
 public interface TransactionService {
 
@@ -16,4 +19,6 @@ public interface TransactionService {
     TransactionDTO update(TransactionDTO transactionDTO);
 
     void deleteById(Long id);
+
+    Page<TransactionWithCategoryDTO> findTypeForCurrentUser(Type type, Pageable pageable);
 }
