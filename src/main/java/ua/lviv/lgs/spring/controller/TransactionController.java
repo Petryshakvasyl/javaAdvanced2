@@ -3,6 +3,7 @@ package ua.lviv.lgs.spring.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,6 +71,7 @@ public class TransactionController {
     }
 
     @GetMapping("/transactions/list")
+    @Secured("ROLE_ADMIN")
     public String getIncomePage(Model model, @RequestParam Type type, Pageable pageable) {
         log.info("in comtroller");
         Page<TransactionWithCategoryDTO> transactionPage = transactionService.findTypeForCurrentUser(type, pageable);
