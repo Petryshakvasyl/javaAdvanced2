@@ -37,7 +37,7 @@ public class User {
     @OneToOne
     private MoneyAccount currentAccount;
 
-    @OneToMany
+    @ManyToMany
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany

@@ -1,3 +1,3 @@
-// function changeLanguage(language) {
-//     window.location.replace()
-// }
+function changeLanguage(language) {
+    window.location.replace()
+}

@@ -3,25 +3,27 @@ package ua.lviv.lgs.spring.dto;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 public class UserDTO {
 
     private Long id;
-    @NotNull(message = "required filed")
+    @NotEmpty
     private String firstName;
-    @NotNull(message = "required filed")
+    @NotEmpty
     private String lastName;
-    @NotNull(message = "required filed")
+    @NotEmpty
     private String username;
-    @NotNull(message = "required filed")
-    @Email(message = "please enter valid email")
+    @NotEmpty
+    @Email
     private String email;
 
-    @NotNull(message = "required filed")
+    @NotEmpty
+    @Min(4)
     private String password;
 
-    @NotNull(message = "required filed")
+    @NotEmpty
     private String passwordConfirm;
 }
