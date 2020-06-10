@@ -32,7 +32,7 @@
 <div class="container p-4 my-2 border">
     <div class="row">
         <div class="col align-self-center">
-            <springForm:form modelAttribute="transaction" action="${transactionUrl}">
+            <springForm:form modelAttribute="transaction" action="${transactionUrl}" enctype="multipart/form-data">
                 <springForm:hidden path="id"/>
                 <springForm:hidden path="type"/>
                 <div class="form-group">
@@ -64,6 +64,13 @@
                                       placeholder="yyyy-MM-dd" cssErrorClass="form-control is-invalid"/>
                     <springForm:errors path="date" cssClass="error"/>
                 </div>
+                <div class="form-group">
+                    <label for="date">Check</label>
+                        <%--                    <fmt:formatDate value="${transaction.date}" pattern="yyyy-MM-dd" var="transactionDate"/>--%>
+                    <springForm:input path="check" class="form-control" type="file" id="check"
+                                      cssErrorClass="form-control is-invalid"/>
+                    <springForm:errors path="date" cssClass="error"/>
+                </div>
                 <c:choose>
                     <c:when test="${transaction.id == null}">
                         <springForm:button type="submit" class="btn btn-primary">Add</springForm:button>
@@ -76,6 +83,10 @@
             </springForm:form>
         </div>
     </div>
+</div>
+
+<div>
+    <img src="/transaction/154/check">
 </div>
 
 </body>

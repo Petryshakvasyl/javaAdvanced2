@@ -40,6 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionDTO createInCurrentUserAccount(TransactionDTO transactionDTO, Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(userId));
         Transaction transaction = transactionMapper.toEntity(transactionDTO);
+
         MoneyAccount currentUserAccount = user.getCurrentAccount();
         transaction.setMoneyAccount(currentUserAccount);
         transactionRepository.save(transaction);

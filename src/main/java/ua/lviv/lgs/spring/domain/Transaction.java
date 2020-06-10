@@ -36,6 +36,9 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "money_account_id")
     private MoneyAccount moneyAccount;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Check check;
 }
 
 

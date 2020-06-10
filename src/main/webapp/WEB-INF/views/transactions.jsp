@@ -17,6 +17,7 @@
                 <td>${transaction.date}</td>
                 <td>${transaction.description}</td>
                 <td>${transaction.category.name}</td>
+                <td><img src="/transaction/${transaction.id}/check"></td>
             </tr>
         </c:forEach>
     </table>

@@ -1,6 +1,7 @@
 package ua.lviv.lgs.spring.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 import ua.lviv.lgs.spring.controller.validators.DateConstrain;
 import ua.lviv.lgs.spring.domain.Type;
 
@@ -28,4 +29,6 @@ public class TransactionDTO {
 
     @NotNull(message = "please select a category")
     private Long categoryId;
+
+    private MultipartFile check;
 }
